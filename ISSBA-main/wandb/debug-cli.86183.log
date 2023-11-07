@@ -1,0 +1,129 @@
+2023-11-07 22:12:30 INFO Retry attempt failed:
+Traceback (most recent call last):
+  File "e:\anaconda\envs\pyt36\lib\site-packages\urllib3\connectionpool.py", line 712, in urlopen
+    self._prepare_proxy(conn)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\urllib3\connectionpool.py", line 1012, in _prepare_proxy
+    conn.connect()
+  File "e:\anaconda\envs\pyt36\lib\site-packages\urllib3\connection.py", line 369, in connect
+    self.sock = conn = self._connect_tls_proxy(hostname, conn)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\urllib3\connection.py", line 510, in _connect_tls_proxy
+    ssl_context=ssl_context,
+  File "e:\anaconda\envs\pyt36\lib\site-packages\urllib3\util\ssl_.py", line 453, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\urllib3\util\ssl_.py", line 495, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock)
+  File "e:\anaconda\envs\pyt36\lib\ssl.py", line 401, in wrap_socket
+    _context=self, _session=session)
+  File "e:\anaconda\envs\pyt36\lib\ssl.py", line 808, in __init__
+    self.do_handshake()
+  File "e:\anaconda\envs\pyt36\lib\ssl.py", line 1061, in do_handshake
+    self._sslobj.do_handshake()
+  File "e:\anaconda\envs\pyt36\lib\ssl.py", line 683, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: EOF occurred in violation of protocol (_ssl.c:748)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\anaconda\envs\pyt36\lib\site-packages\requests\adapters.py", line 450, in send
+    timeout=timeout
+  File "e:\anaconda\envs\pyt36\lib\site-packages\urllib3\connectionpool.py", line 800, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "e:\anaconda\envs\pyt36\lib\site-packages\urllib3\util\retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\anaconda\envs\pyt36\lib\site-packages\wandb\sdk\lib\retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\wandb\sdk\internal\internal_api.py", line 366, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "e:\anaconda\envs\pyt36\lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\wandb\sdk\lib\gql_request.py", line 58, in execute
+    request = self.session.post(self.url, **post_args)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\requests\sessions.py", line 577, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\requests\sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\requests\sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "e:\anaconda\envs\pyt36\lib\site-packages\requests\adapters.py", line 517, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),))
+2023-11-07 22:12:32 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:12:32 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:12:32 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:12:32 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:12:32 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:12:32 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:20:14 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:20:14 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:20:14 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:20:14 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:20:14 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 22:20:14 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:42:07 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:42:07 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:42:07 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:42:07 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:42:07 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:42:07 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:43:12 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:43:12 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:43:12 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:43:12 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:43:12 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:43:12 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:54:51 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:54:51 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:54:51 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:54:51 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:54:51 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-07 23:54:51 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:03:53 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:03:53 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:03:53 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:03:53 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:03:53 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:03:53 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:09:23 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:09:23 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:09:23 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:09:23 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:09:23 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:09:23 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:11:11 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:11:11 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:11:11 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:11:11 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:11:11 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:11:11 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:14:28 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:14:28 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:14:28 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:14:28 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:14:28 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:14:28 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:20:07 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:20:07 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:20:07 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:20:07 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:20:07 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:20:07 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:24:45 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:24:45 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:24:45 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:24:45 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:24:45 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:24:45 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:25:02 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:25:02 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:25:02 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:25:02 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:25:02 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/
+2023-11-08 00:25:02 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),)': /api/4504800232407040/envelope/

@@ -1,0 +1,18 @@
+{
+    "os": "Windows-10-10.0.22621-SP0",
+    "python": "3.6.2",
+    "heartbeatAt": "2023-11-07T16:30:48.531997",
+    "startedAt": "2023-11-07T16:30:44.097839",
+    "docker": null,
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "gpu_count": 1,
+    "cpu_count": 16,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "C:\\Users\\86183\\Desktop\\pytorch\\ISSBA-main\\train.py",
+    "codePath": "train.py",
+    "host": "hstx1yj",
+    "username": "86183",
+    "executable": "E:\\Anaconda\\envs\\pyt36\\python.exe"
+}

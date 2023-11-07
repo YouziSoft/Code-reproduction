@@ -1,0 +1,65 @@
+2023-11-07 22:16:21,544 INFO    StreamThr :3756 [internal.py:wandb_internal():89] W&B internal server running at pid: 3756, started at: 2023-11-07 22:16:21.543435
+2023-11-07 22:16:21,546 DEBUG   HandlerThread:3756 [handler.py:handle_request():144] handle_request: status
+2023-11-07 22:16:21,560 INFO    WriterThread:3756 [datastore.py:open_for_write():85] open: C:\Users\86183\Desktop\pytorch\ISSBA-main\wandb\run-20231107_221621-d56ykzvt\run-d56ykzvt.wandb
+2023-11-07 22:16:21,563 DEBUG   SenderThread:3756 [sender.py:send():380] send: header
+2023-11-07 22:16:21,565 DEBUG   SenderThread:3756 [sender.py:send():380] send: run
+2023-11-07 22:16:25,094 INFO    SenderThread:3756 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\urllib3\connectionpool.py", line 712, in urlopen
+    self._prepare_proxy(conn)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\urllib3\connectionpool.py", line 1012, in _prepare_proxy
+    conn.connect()
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\urllib3\connection.py", line 369, in connect
+    self.sock = conn = self._connect_tls_proxy(hostname, conn)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\urllib3\connection.py", line 510, in _connect_tls_proxy
+    ssl_context=ssl_context,
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\urllib3\util\ssl_.py", line 453, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\urllib3\util\ssl_.py", line 495, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock)
+  File "E:\Anaconda\envs\pyt36\lib\ssl.py", line 401, in wrap_socket
+    _context=self, _session=session)
+  File "E:\Anaconda\envs\pyt36\lib\ssl.py", line 808, in __init__
+    self.do_handshake()
+  File "E:\Anaconda\envs\pyt36\lib\ssl.py", line 1061, in do_handshake
+    self._sslobj.do_handshake()
+  File "E:\Anaconda\envs\pyt36\lib\ssl.py", line 683, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: EOF occurred in violation of protocol (_ssl.c:748)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\requests\adapters.py", line 450, in send
+    timeout=timeout
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\urllib3\connectionpool.py", line 800, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\urllib3\util\retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\sdk\lib\retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\sdk\internal\internal_api.py", line 366, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\sdk\lib\gql_request.py", line 58, in execute
+    request = self.session.post(self.url, **post_args)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\requests\sessions.py", line 577, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\requests\sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\requests\sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\requests\adapters.py", line 517, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:748)'),))
+2023-11-07 22:16:25,599 DEBUG   HandlerThread:3756 [handler.py:handle_request():144] handle_request: shutdown
+2023-11-07 22:16:25,599 INFO    HandlerThread:3756 [handler.py:finish():844] shutting down handler
+2023-11-07 22:16:26,604 INFO    WriterThread:3756 [datastore.py:close():294] close: C:\Users\86183\Desktop\pytorch\ISSBA-main\wandb\run-20231107_221621-d56ykzvt\run-d56ykzvt.wandb

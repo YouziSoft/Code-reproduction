@@ -1,10 +1,12 @@
 import collections
 import numpy as np
+import wandb
 from torch.autograd import Variable
 import torch as torch
 import copy
-
+import os
 import torch
+
 
 def zero_gradients(x):
     """
@@ -27,6 +29,7 @@ def deepfool(image, net, num_classes=10, overshoot=0.02, max_iter=50):
     :return: 最小扰动、所需的迭代次数、新的估计标签和扰动后的图像
     """
     # 检查是否可以使用 GPU
+    os.environ["WANDB_API_KEY"] = "5654c94edb1c5eac8f679b085e1b27514a0b6878"
     is_cuda = torch.cuda.is_available()
 
     if is_cuda:
@@ -59,6 +62,12 @@ def deepfool(image, net, num_classes=10, overshoot=0.02, max_iter=50):
     k_i = label
 
     while k_i == label and loop_i < max_iter:
+        wandb.init(
+            entity="9-nine",
+            project="Deepfool",
+            group="ResNet18",
+            name="train",
+        )
         pert = np.inf
 
         # 对原始类别的梯度
@@ -102,8 +111,19 @@ def deepfool(image, net, num_classes=10, overshoot=0.02, max_iter=50):
         k_i = np.argmax(fs.data.cpu().numpy().flatten())
 
         loop_i += 1
-    #1 + overshoot 用于缩放每次的扰动，其中 overshoot 是作为终止条件的小值，以避免微小更新的过度
-    r_tot = (1 + overshoot) * r_tot
 
+        wandb.log(
+            {
+                "epoch": loop_i + 1,
+                "train/r_tot": r_tot,
+                "train/x": x,
+                "train/fs": fs,
+                "train/k_i": k_i,
+                "learning_rate": 0.001,
+            }
+        )
+    #1 + overshoot 用于缩放每次的扰动
+    r_tot = (1 + overshoot) * r_tot
+    wandb.finish()
     return r_tot, loop_i, label, k_i, pert_image
 

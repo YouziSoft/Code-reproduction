@@ -6,16 +6,20 @@ import torch.optim as optim
 import torchvision.datasets as datasets
 import torch.utils.data as data
 import torchvision.transforms as transforms
+import wandb
+
 from models import get_model
 import random
 import numpy as np
 from glob import glob
 from PIL import Image
 import time
-from utils import Bar, Logger, AverageMeter, accuracy, savefig
+import utils
 import shutil
 import json
 from pprint import pprint
+
+from utils.progress.progress.bar import Bar
 
 
 def save_checkpoint(state, is_best, checkpoint='checkpoint', filename='imagenet_checkpoint.pth.tar'):
@@ -79,11 +83,11 @@ class bd_data_val(data.Dataset):
 def train(model, dataloader, bd_dataloader, criterion, optimizer, use_cuda):
     model.train()
 
-    batch_time = AverageMeter()
-    data_time = AverageMeter()
-    losses = AverageMeter()
-    top1 = AverageMeter()
-    top5 = AverageMeter()
+    batch_time = utils.AverageMeter()
+    data_time = utils.AverageMeter()
+    losses = utils.AverageMeter()
+    top1 = utils.AverageMeter()
+    top5 = utils.AverageMeter()
     end = time.time()
 
     bar = Bar('Processing', max=len(dataloader))
@@ -103,7 +107,7 @@ def train(model, dataloader, bd_dataloader, criterion, optimizer, use_cuda):
         loss = criterion(outputs, targets)
 
         # measure accuracy and record loss
-        prec1, prec5 = accuracy(outputs.data, targets.data, topk=(1, 5))
+        prec1, prec5 = utils.accuracy(outputs.data, targets.data, topk=(1, 5))
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
@@ -129,18 +133,30 @@ def train(model, dataloader, bd_dataloader, criterion, optimizer, use_cuda):
                     top1=top1.avg,
                     top5=top5.avg,
                     )
+        print(f"epoch = {batch_idx + 1}, loss = {losses.avg}, top5_accuracy = {top5.avg}, top1_accuracy = {top1.avg}")
+        wandb.log(
+            {
+                "epoch": batch_idx + 1,
+                "train/loss": losses.avg,
+                "train/top5_accuracy": top5.avg,
+                "train/top1_accuracy": top1.avg,
+                "learning_rate": 0.001,
+            }
+        )
         bar.next()
+
+    wandb.finish()
     bar.finish()
     return (losses.avg, top1.avg)
 
 
 def test(model, testloader, criterion, use_cuda):
 
-    batch_time = AverageMeter()
-    data_time = AverageMeter()
-    losses = AverageMeter()
-    top1 = AverageMeter()
-    top5 = AverageMeter()
+    batch_time = utils.AverageMeter()
+    data_time = utils.AverageMeter()
+    losses = utils.AverageMeter()
+    top1 = utils.AverageMeter()
+    top5 = utils.AverageMeter()
 
     # switch to evaluate mode
     model.eval()
@@ -159,7 +175,7 @@ def test(model, testloader, criterion, use_cuda):
         loss = criterion(outputs, targets)
 
         # measure accuracy and record loss
-        prec1, prec5 = accuracy(outputs.data, targets.data, topk=(1, 5))
+        prec1, prec5 = utils.accuracy(outputs.data, targets.data, topk=(1, 5))
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
@@ -181,7 +197,9 @@ def test(model, testloader, criterion, use_cuda):
                     top5=top5.avg,
                     )
         bar.next()
+
     bar.finish()
+
     return (losses.avg, top1.avg)
 
 
@@ -269,17 +287,26 @@ def main(args):
             start_epoch = checkpoint['epoch']
             model.load_state_dict(checkpoint['state_dict'])
             optimizer.load_state_dict(checkpoint['optimizer'])
-            logger = Logger(os.path.join(args.checkpoint, 'imagenet.txt'), title=title, resume=True)
+            logger = utils.Logger(os.path.join(args.checkpoint, 'imagenet.txt'), title=title, resume=True)
         except:
-            logger = Logger(os.path.join(args.checkpoint, 'imagenet.txt'), title=title)
+            logger = utils.Logger(os.path.join(args.checkpoint, 'imagenet.txt'), title=title)
             logger.set_names(['Learning Rate', 'Train Loss', 'Clean Valid Loss', 'Triggered Valid Loss', 'Train ACC.', 'Valid ACC.', 'ASR'])
     else:
-        logger = Logger(os.path.join(args.checkpoint, 'imagenet.txt'), title=title)
+        logger = utils.Logger(os.path.join(args.checkpoint, 'imagenet.txt'), title=title)
         logger.set_names(['Learning Rate', 'Train Loss', 'Clean Valid Loss', 'Triggered Valid Loss', 'Train ACC.', 'Valid ACC.', 'ASR'])
-    
+
+
     # Train and val
     lr = args.lr
     for epoch in range(start_epoch, args.epochs):
+
+        wandb.init(
+            entity="9-nine",
+            project="ISSBA",
+            group="ResNet18",
+            name="train",
+        )
+
         lr = adjust_learning_rate(lr, optimizer, epoch, args) 
     
         print('\nEpoch: [%d | %d] LR: %f' % (epoch + 1, args.epochs, lr))
@@ -306,8 +333,7 @@ def main(args):
                 'best_acc_trigger': best_acc_trigger,
                 'optimizer' : optimizer.state_dict(),
             }, is_best, checkpoint=args.checkpoint)
-    
-    
+
     logger.close()
     logger.plot()
     # savefig(os.path.join(args.checkpoint, 'imagenet.eps'))
@@ -317,6 +343,8 @@ def main(args):
 
 
 if __name__ == '__main__':
+    os.environ["WANDB_API_KEY"] = "5654c94edb1c5eac8f679b085e1b27514a0b6878"
+
     parser = argparse.ArgumentParser(description='PyTorch Backdoor Training')    # Mode
 
     parser.add_argument('-n', '--net', default='res18', type=str,
