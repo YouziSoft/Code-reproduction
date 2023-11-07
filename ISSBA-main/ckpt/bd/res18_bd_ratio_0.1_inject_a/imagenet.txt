@@ -1,0 +1,1 @@
+Learning Rate	Train Loss	Clean Valid Loss	Triggered Valid Loss	Train ACC.	Valid ACC.	ASR	

@@ -1,0 +1,24 @@
+{
+    "net": "res18",
+    "workers": 4,
+    "epochs": 25,
+    "start_epoch": 0,
+    "train_batch": 128,
+    "test_batch": 32,
+    "lr": 0.001,
+    "schedule": [
+        15,
+        20
+    ],
+    "gamma": 0.1,
+    "momentum": 0.9,
+    "weight_decay": 0.0001,
+    "checkpoint": "ckpt/bd/res18_bd_ratio_0.1_inject_a",
+    "resume": "",
+    "manualSeed": null,
+    "gpu_id": "0",
+    "data_dir": "datasets/sub-imagenet-200",
+    "bd_data_dir": "datasets/sub-imagenet-200-bd/inject_a/",
+    "bd_label": 0,
+    "bd_ratio": 0.1
+}
