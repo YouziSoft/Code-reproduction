@@ -1,0 +1,18 @@
+{
+    "os": "Windows-10-10.0.22621-SP0",
+    "python": "3.6.2",
+    "heartbeatAt": "2023-11-08T04:27:20.849445",
+    "startedAt": "2023-11-08T04:27:16.943862",
+    "docker": null,
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "gpu_count": 1,
+    "cpu_count": 16,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "C:\\Users\\86183\\Desktop\\pytorch\\DeepFool-master\\Python\\test_deepfool.py",
+    "codePath": "test_deepfool.py",
+    "host": "hstx1yj",
+    "username": "86183",
+    "executable": "E:\\Anaconda\\envs\\pyt36\\python.exe"
+}

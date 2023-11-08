@@ -1,0 +1,35 @@
+2023-11-08 12:27:36,305 INFO    MainThread:19904 [wandb_setup.py:_flush():76] Loading settings from C:\Users\86183\.config\wandb\settings
+2023-11-08 12:27:36,305 INFO    MainThread:19904 [wandb_setup.py:_flush():76] Loading settings from C:\Users\86183\Desktop\pytorch\DeepFool-master\Python\wandb\settings
+2023-11-08 12:27:36,305 INFO    MainThread:19904 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'api_key': '***REDACTED***'}
+2023-11-08 12:27:36,306 INFO    MainThread:19904 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'test_deepfool.py', 'program': 'C:\\Users\\86183\\Desktop\\pytorch\\DeepFool-master\\Python\\test_deepfool.py'}
+2023-11-08 12:27:36,306 INFO    MainThread:19904 [wandb_init.py:_log_setup():428] Logging user logs to C:\Users\86183\Desktop\pytorch\DeepFool-master\Python\wandb\run-20231108_122736-3uwsffc9\logs\debug.log
+2023-11-08 12:27:36,308 INFO    MainThread:19904 [wandb_init.py:_log_setup():429] Logging internal logs to C:\Users\86183\Desktop\pytorch\DeepFool-master\Python\wandb\run-20231108_122736-3uwsffc9\logs\debug-internal.log
+2023-11-08 12:27:36,310 INFO    MainThread:19904 [wandb_init.py:init():462] calling init triggers
+2023-11-08 12:27:36,310 INFO    MainThread:19904 [wandb_init.py:init():466] wandb.init called with sweep_config: {}
+config: {}
+2023-11-08 12:27:36,311 INFO    MainThread:19904 [wandb_init.py:init():515] starting backend
+2023-11-08 12:27:36,311 INFO    MainThread:19904 [backend.py:_multiprocessing_setup():99] multiprocessing start_methods=spawn, using: spawn
+2023-11-08 12:27:36,329 INFO    MainThread:19904 [backend.py:ensure_launched():217] starting backend process...
+2023-11-08 12:27:36,467 INFO    MainThread:19904 [backend.py:ensure_launched():222] started backend process with pid: 6768
+2023-11-08 12:27:36,468 INFO    MainThread:19904 [wandb_init.py:init():525] backend started and connected
+2023-11-08 12:27:36,483 INFO    MainThread:19904 [wandb_init.py:init():596] updated telemetry
+2023-11-08 12:27:36,489 INFO    MainThread:19904 [wandb_init.py:init():628] communicating run to backend with 30 second timeout
+2023-11-08 12:27:40,274 WARNING MainThread:19904 [wandb_init.py:init():1020] interrupted
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\sdk\wandb_init.py", line 999, in init
+    run = wi.init()
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\sdk\wandb_init.py", line 631, in init
+    run, timeout=self.settings.init_timeout
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\sdk\interface\interface.py", line 223, in communicate_run
+    return self._communicate_run(run, timeout=timeout)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 324, in _communicate_run
+    resp = self._communicate(req, timeout=timeout)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 226, in _communicate
+    return self._communicate_async(rec, local=local).get(timeout=timeout)
+  File "E:\Anaconda\envs\pyt36\lib\site-packages\wandb\sdk\interface\router.py", line 37, in get
+    is_set = self._object_ready.wait(timeout)
+  File "E:\Anaconda\envs\pyt36\lib\threading.py", line 551, in wait
+    signaled = self._cond.wait(timeout)
+  File "E:\Anaconda\envs\pyt36\lib\threading.py", line 299, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt
